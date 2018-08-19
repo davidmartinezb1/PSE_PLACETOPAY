@@ -1,0 +1,24 @@
+{
+    "require": {
+        "illuminate/database": "^5.2"
+    },
+
+    "name": "david/p2p",
+    "description": "Consumer Soap Web Service",
+    "authors": [{
+        "name": "David M",
+        "email": "davidmartinezb1@hotmail.com"
+    }],
+
+    "autoload": {
+        "psr-4": {
+            "p2p\\": "src/",
+            "p2p\\Model\\": "src/Model/"
+        },
+        "classmap": [
+            "src/"
+        ]
+    }
+
+
+}
