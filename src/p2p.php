@@ -26,7 +26,6 @@ class P2P
    
     
     public static function getListBanks() {
-    	
     	$listaBancos = [];
 
     	try{
@@ -49,17 +48,6 @@ class P2P
 
     private static function callWebService($function,$parameters){
         $parameters['auth']= self::$auth;
-   
-        /*//parametro de prueba
-        $parameters= array(
-            'auth' =>
-                array(
-                    'login' => "6dd490faf9cb87a9862245da41170ff2",
-                    'tranKey' => sha1(date('c') . "024h1IlD", false),
-                    'seed' => date('c')
-                )
-        );*/
-
         $client = new \SoapClient(self::$wsdl,array('trace'=>true));
         $client->__setLocation(self::$location);// apunto al endpoint real
         $response = $client->__soapCall($function, array($parameters));        
@@ -131,17 +119,18 @@ class P2P
 
     public static function getTransacciones($atribute=null,$value=null)
     {
-    	$transacciones = Transaccion::all();
-    	if($atribute && $value){
-    		$transacciones = Transaccion::where($atribute, $value)->get();
-    	}
+        $transacciones = Transaccion::get()->all();
         
+    	if($atribute && $value){
+    		$transacciones = Transaccion::where($atribute, $value)->getContent();
+    	}
+            
         return $transacciones;
     }
 
     public static function verifyEstatusTransactions() //PARA SER LLAMADO AL MENOS CADA 12 MIN.
     {
-        //SELECT * FROM TRANSACCIONES WHERE TIMESTAMPDIFF(SECOND, INSERTED_AT, CURRENT_TIMESTAMP) > 12;
+    
         $lastTime = strtotime('-7 minutes');
         $transactions = Transaccion::where([
     	['status', '=', 'PENDING'],

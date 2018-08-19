@@ -13,7 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densityDpi=device-dpi" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css"><title>Pagos - Place To Pay</title>
+        <link rel="stylesheet" href="css/style.css">
+        <title>Pagos - Place To Pay</title>
         
     </head>
 
@@ -34,7 +35,7 @@
                     <div class="box-items">
                         <?php
                             $obj= new P2P;
-                            $obj->createAuth($wsdl, $login, $tranKey,$location,$additional=null); //metodo para retornar el auth
+                            $a=$obj->createAuth($wsdl, $login, $tranKey,$location,$additional=null); //metodo para retornar el auth
                             $bancos=$obj->getListBanks();// metodo para retornar el listado de bancos
                             $bancos=json_decode($bancos);
                         ?>
